@@ -5,7 +5,7 @@ using namespace std;
 
 void wypisz(int a)
 {
-    cout << a;
+    cout << a <<endl;
 }
 int suma(int x, int y)
 {
