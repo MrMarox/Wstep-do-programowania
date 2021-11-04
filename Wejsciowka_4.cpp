@@ -34,7 +34,7 @@ bool czyNalezy(vector<int>tab, int element)
 
 bool czyZawiera(vector<int>tab, vector<int>tab2)
 {
-    for (int i = 0; tab.size(); i++)
+    for (int i = 0; i < tab.size(); i++)
     {
         if (!czyNalezy(tab, tab2[i]))
         {
