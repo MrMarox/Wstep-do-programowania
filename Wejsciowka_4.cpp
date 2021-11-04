@@ -3,9 +3,9 @@
 
 using namespace std;
 
-void wypisz(int a)
+void wypisz(int x)
 {
-    cout << a <<endl;
+    cout << x << endl;
 }
 int suma(int x, int y)
 {
@@ -45,16 +45,15 @@ bool czyZawiera(vector<int>tab, vector<int>tab2)
 
 int main()
 {
-    int a, b, c, element;
+    int a, b, element;
     a = 4;
     b = 3;
-    c = 6;
-    element = 3;
+    element = 5;
+    
+    vector<int>tab = { 1,2,3,4 };
+    vector<int>tab2 = { 4,3,2,1 };
+    
     wypisz(suma(a, b));
-
-    vector<int>tab = { 1,4,5,6 };
-    vector<int>tab2 = { 3,5,4,2 };
-
     wypisz(tab);
 
     if (czyNalezy(tab, element) == true)
