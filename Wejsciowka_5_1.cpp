@@ -54,6 +54,16 @@ bool czyzawiera(vector<int>tab, vector<int>tab2)
 	}return true;
 }
 
+vector<int> unikalnosc(vector<int>tab)/*<---- atrybut */
+{
+	vector<int>wynik;
+	for (int i = 0; i < tab.size(); i++) {
+		if (!CzyNalezy(wynik, tab[i])) {
+			wynik.push_back(tab[i]);
+		}
+	}	return wynik;
+}
+
 
 int main()
 {
@@ -85,5 +95,7 @@ int main()
 	{
 		cout << "nie zawiera" << endl;
 	}
+	
+	wypisz(unikalnosc(tab));
 }
 
