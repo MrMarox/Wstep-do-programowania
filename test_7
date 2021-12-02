@@ -1,0 +1,184 @@
+// ConsoleApplication29.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
+//
+
+#include "pch.h"
+#include <iostream>
+#include <vector>
+#include <map>
+using namespace std;
+
+void wypisz(int x)
+{
+	cout << x << endl;
+}
+void wypisz(vector<int>tab)
+{
+	for (int i = 0; i < tab.size(); i++)
+	{
+		cout << tab[i] << " ";
+	}cout << endl;
+}
+void wypisz(vector<vector<int>>tab)
+{
+	for (int j = 0; j < tab[1].size(); j++)
+	{
+		for (int i = 0; i < tab.size(); i++)
+		{
+			cout << tab[i][j] << " ";
+		}cout << endl;
+	}
+}
+
+int min(vector<int>tab)
+{
+	int wynik = tab[0];
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (wynik > tab[i])
+		{
+			wynik = tab[i];
+		}
+	}return wynik;
+}
+
+bool czynalezy(vector<int>tab, int element)
+{
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (tab[i] == element)
+		{
+			return true;
+		}
+	}return false;
+}
+
+bool czynalezyklucz(map<int, int>m, int klucz)
+{
+	for (int i = 0; i < m.size(); i++)
+	{
+		if (m[i] == klucz)
+		{
+			return true;
+		}
+	}return false;
+}
+
+bool czynalezyklucz2(map<int, int>m, int klucz)
+{
+	for (auto const& item: m) /*const& dodac jesli nie działa mozna usunac*/
+	{
+		if (item.first == klucz)
+		{
+			return true;
+		}
+	}return false;
+}
+
+bool czyzawiera(vector<int>tab, vector<int>tab2)
+{
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (!czynalezy(tab2, tab[i]))
+		{
+			return false;
+		}
+	}return true;
+}
+
+vector<int> unikalnosc(vector<int>tab)
+{
+	vector<int>wynik;
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (!czynalezy(wynik, tab[i]))
+		{
+			wynik.push_back(tab[i]);
+		}
+	}return wynik;
+}
+
+
+vector<vector<int>> czestosc(vector<int>tab)
+{
+	vector<vector<int>>wynik;
+	vector<int>u = unikalnosc(tab);
+	vector<int>c;
+	for (int i = 0; i < u.size(); i++)
+	{
+		int element = u[i];
+		int licznik = 0;
+		for (int j = 0; j < tab.size(); j++)
+		{
+			if (element == tab[j])
+			{
+				licznik++;
+			}
+		}c.push_back(licznik);
+	}wynik.push_back(u);
+	 wynik.push_back(c);
+	 return wynik;
+}
+
+map<int, int> czestosc1(vector<int>tab)
+{
+	map<int,int>wynik;
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (!czynalezyklucz2(wynik, tab[i]))
+		{
+			wynik.insert({ tab[i,1] });
+		}else
+		{
+			wynik[tab[i]]++;
+		}
+	}
+}
+int main()
+{
+	int element = 5;
+	vector<int>tab = { 1,1,1,1,3,3,3,4,5,5,5 };
+	vector<int>tab2 = { 1,3,3,4,5 };
+
+		wypisz(tab);
+		wypisz(unikalnosc(tab));
+		wypisz(min(tab));
+		wypisz(czestosc(tab));
+
+		if (czynalezy(tab, element) == true)
+		{
+			cout << "nalezy" << endl;
+		}
+		else
+		{
+			cout << "nie nalezy" << endl;
+		}
+
+		map<int, int>m;
+		m.insert({ 8,5 });
+		m.insert({ 4,2 });
+		m.insert({ -3,1 });
+
+		if (czynalezyklucz(m, 5) == true)
+		{
+			cout << "nalezy" << endl;
+		}
+		else
+		{
+			cout << "nie nalezy" << endl;
+		}
+
+	
+		
+
+}
+
+// Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
+// Debugowanie programu: F5 lub menu Debugowanie > Rozpocznij debugowanie
+
+// Porady dotyczące rozpoczynania pracy:
+//   1. Użyj okna Eksploratora rozwiązań, aby dodać pliki i zarządzać nimi
+//   2. Użyj okna programu Team Explorer, aby nawiązać połączenie z kontrolą źródła
+//   3. Użyj okna Dane wyjściowe, aby sprawdzić dane wyjściowe kompilacji i inne komunikaty
+//   4. Użyj okna Lista błędów, aby zobaczyć błędy
+//   5. Wybierz pozycję Projekt > Dodaj nowy element, aby utworzyć nowe pliki kodu, lub wybierz pozycję Projekt > Dodaj istniejący element, aby dodać istniejące pliku kodu do projektu
+//   6. Aby w przyszłości ponownie otworzyć ten projekt, przejdź do pozycji Plik > Otwórz > Projekt i wybierz plik sln
