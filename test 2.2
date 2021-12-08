@@ -1,0 +1,151 @@
+#include <iostream>
+#include <vector>
+#include <map>
+using namespace std;
+
+void wypisz(int x)
+{
+	cout << x << endl;
+}
+void wypisz(vector<int>tab)
+{
+	for (int i = 0; i < tab.size(); i++)
+	{
+		cout << tab[i] << " ";
+	}cout << endl;
+}
+void wypisz(vector<vector<int>>tab)
+{
+	for (int j = 0; j < tab[1].size(); j++)
+	{
+		for (int i = 0; i < tab.size(); i++)
+		{
+			cout << tab[i][j] << " ";
+		}cout << endl;
+	}
+}
+
+void wypisz(map<int, int>m)
+{
+	for (auto item : m)
+	{
+		cout << item.first << " ";
+		cout << item.second << " razy\n";
+	}
+}
+
+
+int min(vector<int>tab)
+{
+	int wynik = tab[0];
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (wynik > tab[i])
+		{
+			wynik = tab[i];
+		}
+	}return wynik;
+}
+
+bool czynalezy(vector<int>tab, int element)
+{
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (tab[i] == element)
+		{
+			return true;
+		}
+	}return false;
+}
+
+
+bool czynalezyklucz(map<int, int>m, int klucz)
+{
+	for (auto  item : m)
+	{
+		if (item.first == klucz)
+		{
+			return true;
+		}
+	}return false;
+}
+
+bool czyzawiera(vector<int>tab, vector<int>tab2)
+{
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (!czynalezy(tab2, tab[i]))
+		{
+			return false;
+		}
+	}return true;
+}
+
+vector<int> unikalnosc(vector<int>tab)
+{
+	vector<int>wynik;
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (!czynalezy(wynik, tab[i]))
+		{
+			wynik.push_back(tab[i]);
+		}
+	}return wynik;
+}
+
+
+map<int, int>czestosc(vector<int>tab)
+{
+	map<int, int>wynik;
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (!czynalezyklucz(wynik, tab[i]))
+		{
+			wynik.insert({ tab[i],1 });
+		}
+		else
+		{
+			wynik[tab[i]]++;
+		}
+	}
+	return wynik;
+}
+
+int main()
+{
+	int element = 5;
+	vector<int>tab = { 1,1,1,1,3,3,3,4,5,5,5 };
+	vector<int>tab2 = { 1,3,3,4,5 };
+
+	wypisz(tab);
+	wypisz(unikalnosc(tab));
+	wypisz(min(tab));
+	wypisz(czestosc(tab));
+
+	if (czynalezy(tab, element) == true)
+	{
+		cout << "nalezy" << endl;
+	}
+	else
+	{
+		cout << "nie nalezy" << endl;
+	}
+
+	map<int, int>m;
+	m.insert({ 8,5 });
+	m.insert({ 4,2 });
+	m.insert({ -3,1 });
+
+	if (czynalezyklucz(m, 5) == true)
+	{
+		cout << "nalezy" << endl;
+	}
+	else
+	{
+		cout << "nie nalezy" << endl;
+	}
+
+
+
+
+}
