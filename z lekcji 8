@@ -1,0 +1,168 @@
+// ConsoleApplication33.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
+//
+
+#include "pch.h"
+#include <iostream>
+#include <vector>
+#include <map>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+void wypisz(int x) 
+{
+	cout << x << endl;
+}
+void wypisz(vector<int>tab)
+{
+	for (int i = 0; i < tab.size(); i++)
+	{
+		cout << tab[i] << " ";
+	}cout << endl;
+}
+void wypisz(map<int, int>m)
+{
+	for (auto item : m)
+	{
+		cout << item.first << " ";
+		cout << item.second << " razy" << endl;
+	}
+}
+int min(vector<int>tab)
+{
+	int wynik = tab[0];
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (wynik > tab[i])
+		{
+			wynik = tab[i];
+		}
+	}return wynik;
+}
+bool czynalezy(vector<int>tab, int element)
+{
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if(tab[i]==element)
+		{
+			return true;
+		}
+	}return false;
+}
+bool czynalezyklucz(map<int, int>m, int klucz)
+{
+	for (auto item : m)
+	{
+		if (item.first == klucz)
+		{
+			return true;
+		}
+	}return false;
+}
+
+bool czyzawiera(vector<int>tab, vector<int>tab2)
+{
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (!czynalezy(tab2, tab[i]))
+		{
+			return false;
+		}
+	}return true;
+}
+
+vector<int> unikalnosc(vector<int>tab)
+{
+	vector<int>wynik;
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (!czynalezy(wynik, tab[i]))
+		{
+			wynik.push_back(tab[i]);
+		}
+	}return wynik;
+}
+map<int, int> czestosc(vector<int>tab)
+{
+	map<int, int>wynik;
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (!czynalezyklucz(wynik, tab[i]))
+		{
+			wynik.insert({ tab[i], 1 });
+		}
+		else
+		{
+			wynik[tab[i]]++;
+		}
+	}return wynik;
+}
+	bool palindorm(vector<int>tab)
+	{
+		int koniec = tab.size() - 1 ;
+		for (int i = 0; i < tab.size() / 2; i++)
+		{
+			if (tab[i] != tab[koniec - i])
+			{
+				return false;
+			}
+		}return true;
+	}
+
+	vector<int> podzielna(vector<int>tab, int dzielnik)
+	{
+		vector<int>wynik;
+		vector<int> u = unikalnosc(tab);
+		for (int i = 0; i < u.size(); i++)
+		{
+			if (u[i] % dzielnik == 0)
+			{
+				wynik.push_back(u[i]);
+			}
+		}return wynik;
+	}
+
+	vector<int> losowanie(int start, int ile, int liczba)
+	{
+		srand(time(NULL));
+		vector<int>wynik;
+		for (int i = 0; i < liczba; i++)
+		{
+			wynik.push_back((rand() % ile) + start);
+		}return wynik;
+	}
+
+	
+	
+
+int main()
+{
+	int element = 5;
+	int x;
+	int dzielnik = 3;
+	vector<int>tab = { 3,3,3,3,5,9,7,2,4,4,4,4,4 };
+	vector<int>tab2 = { 6,6,3,2 };
+
+	wypisz(min(tab));
+	wypisz(czestosc(tab));
+	int los = (rand() % 99) + 1;
+
+	wypisz(los);
+	cout << "podaj liczbe startowa"<< endl;
+	cin >> x;
+
+
+	wypisz(losowanie(1, 99, 20));
+	wypisz(podzielna(tab,dzielnik));
+}
+
+// Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
+// Debugowanie programu: F5 lub menu Debugowanie > Rozpocznij debugowanie
+
+// Porady dotyczące rozpoczynania pracy:
+//   1. Użyj okna Eksploratora rozwiązań, aby dodać pliki i zarządzać nimi
+//   2. Użyj okna programu Team Explorer, aby nawiązać połączenie z kontrolą źródła
+//   3. Użyj okna Dane wyjściowe, aby sprawdzić dane wyjściowe kompilacji i inne komunikaty
+//   4. Użyj okna Lista błędów, aby zobaczyć błędy
+//   5. Wybierz pozycję Projekt > Dodaj nowy element, aby utworzyć nowe pliki kodu, lub wybierz pozycję Projekt > Dodaj istniejący element, aby dodać istniejące pliku kodu do projektu
+//   6. Aby w przyszłości ponownie otworzyć ten projekt, przejdź do pozycji Plik > Otwórz > Projekt i wybierz plik sln
